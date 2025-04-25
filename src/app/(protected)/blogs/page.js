@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { articleService } from "@/lib/service/articleService";
-import BlogCard from "./_components/BlogCard";
+import BlogCard from "@/components/blogs/BlogCard";
 export default function BlogsPage() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

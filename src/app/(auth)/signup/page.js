@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/providers/AuthProvider";
-import AuthForm from "../_components/AuthForm";
+import AuthForm from "../../../components/auth/AuthForm";
 
 export default function SignupPage() {
   const { register } = useAuth();

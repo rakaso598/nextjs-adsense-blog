@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/providers/AuthProvider";
-import AuthForm from "../_components/AuthForm";
+import AuthForm from "../../../components/auth/AuthForm";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -15,8 +15,7 @@ export default function LoginPage() {
 
     const email = formData.get("email");
     const password = formData.get("password");
-    console.log("email", email);
-    console.log("password", password);
+
     if (!email || !password) {
       setErrorMsg("이메일과 비밀번호를 입력해주세요.");
       return;

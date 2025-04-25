@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { articleService } from "@/lib/service/articleService";
-import DeleteButton from "@/components/ui/Button";
-import MutationButtons from "./_components/MutationButtons";
+import MutationButtons from "@/components/blogs/MutationButtons";
 
 export default async function BlogDetailPage({ params }) {
   const { id } = await params;
