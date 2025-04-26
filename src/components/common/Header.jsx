@@ -3,17 +3,11 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/providers/AuthProvider";
-import { useEffect } from "react";
 
 export default function Header() {
   const { user, logout } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
-  useEffect(() => {
-    if (!user) {
-      router.replace("/login");
-    }
-  }, [user]);
 
   return (
     <header className="bg-white shadow-sm border-b-1 border-gray-200">
@@ -44,7 +38,10 @@ export default function Header() {
           <div className="flex items-center">
             {user ? (
               <button
-                onClick={logout}
+                onClick={async () => {
+                  await logout();
+                  router.replace("/login");
+                }}
                 className="cursor-pointer ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900"
               >
                 로그아웃

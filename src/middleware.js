@@ -15,7 +15,9 @@ export function middleware(request) {
   const isAuthRoute = authPaths.some((path) => pathname === path);
 
   // 보호된 경로 목록 관리 (실제 URL 기준)
-  const protectedRoutes = ["/blogs", "/profile"];
+  const protectedRoutes = [
+    /** @TODO 이 주석지우고 보호된 경로 추가 */
+  ];
   // 경로와 모든 하위 경로 포함
   const isProtectedRoute = protectedRoutes.some(
     (route) => pathname === route || pathname.startsWith(`${route}/`),
