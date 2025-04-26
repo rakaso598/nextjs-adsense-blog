@@ -48,7 +48,7 @@ export default function BlogsPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mt-6 mb-6">
         <h1 className="text-2xl font-bold">블로그 글 목록</h1>
         <Link
           href="/blogs/create"

@@ -22,8 +22,6 @@ export function middleware(request) {
   const isProtectedRoute =
     protectedRoutes.some((route) => pathname === route) || isEditRoute;
 
-  console.log("isProtectedRoute", isProtectedRoute);
-
   // 로그인한 사용자가 인증 경로에 접근하는 경우
   if (isAuthRoute && isAuthenticated) {
     return NextResponse.redirect(new URL("/blogs", request.url));

@@ -57,7 +57,6 @@ export default function AuthProvider({ children }) {
     // 로그인 성공 시 유저데이터를 API 에서 응답해주는 경우, 유저 상태 변경
     const userData = await loginAction(email, password);
 
-    console.log("userData in login", userData);
     // 토큰 저장 로직 추가
     if (userData.accessToken && userData.refreshToken) {
       setTokensToCookie(userData.accessToken, userData.refreshToken);

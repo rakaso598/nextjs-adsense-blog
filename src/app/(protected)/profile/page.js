@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
-  console.log("user:", user);
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
