@@ -1,5 +1,6 @@
 "use client";
 
+import { loginAction } from "@/lib/actions/auth";
 import { authService } from "@/lib/service/authService";
 import { userService } from "@/lib/service/userService";
 import { getTokenFromCookie, setTokensToCookie } from "@/utils/auth";
@@ -54,10 +55,11 @@ export default function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     // 로그인 성공 시 유저데이터를 API 에서 응답해주는 경우, 유저 상태 변경
-    const userData = await authService.login(email, password);
+    const userData = await loginAction(email, password);
+
+    console.log("userData in login", userData);
     // 토큰 저장 로직 추가
     if (userData.accessToken && userData.refreshToken) {
-      console.log("userData in login", userData);
       setTokensToCookie(userData.accessToken, userData.refreshToken);
     }
 

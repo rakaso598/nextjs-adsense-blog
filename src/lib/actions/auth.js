@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { authService } from "../service/authService";
 
 // 서버 사이드 전용 함수
 export async function getServerSideToken(type) {
@@ -68,4 +69,9 @@ export async function clearServerSideTokens() {
   cookieStore.delete("refreshToken");
 
   return { success: true };
+}
+
+export async function loginAction(email, password) {
+  const userData = await authService.login(email, password);
+  return userData;
 }
