@@ -1,4 +1,4 @@
-import { getTokenFromCookie } from "@/utils/auth";
+import { getTokenFromCookie } from "@/lib/utils/auth";
 
 /**
  * 기본 fetch 클라이언트 - 인증이 필요 없는 일반 요청용

@@ -1,9 +1,9 @@
 "use client";
 
-import { loginAction } from "@/lib/actions/auth";
+import { loginAction, registerAction } from "@/lib/actions/auth";
 import { authService } from "@/lib/service/authService";
 import { userService } from "@/lib/service/userService";
-import { getTokenFromCookie, setTokensToCookie } from "@/utils/auth";
+import { getTokenFromCookie, setTokensToCookie } from "@/lib/utils/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext({
@@ -39,7 +39,7 @@ export default function AuthProvider({ children }) {
 
   const register = async (nickname, email, password, passwordConfirmation) => {
     // 회원가입 성공 시 유저데이터를 API 에서 응답해주는 경우, 즉시 로그인 처리 가능
-    const userData = await authService.register(
+    const userData = await registerAction(
       nickname,
       email,
       password,

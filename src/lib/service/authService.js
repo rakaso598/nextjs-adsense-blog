@@ -4,9 +4,10 @@ import { clearServerSideTokens } from "../actions/auth";
 export const authService = {
   // 쿠키 인증을 사용하는 로그인
   login: (email, password) =>
-    tokenFetch("/auth/signIn", {
+    defaultFetch("/auth/signIn", {
       method: "POST",
       body: JSON.stringify({ email, password }),
+      cache: "no-store",
     }),
 
   // 회원가입
@@ -14,6 +15,7 @@ export const authService = {
     defaultFetch("/auth/signUp", {
       method: "POST",
       body: JSON.stringify({ nickname, email, password, passwordConfirmation }),
+      cache: "no-store",
     }),
 
   // 로그아웃

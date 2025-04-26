@@ -75,3 +75,18 @@ export async function loginAction(email, password) {
   const userData = await authService.login(email, password);
   return userData;
 }
+
+export async function registerAction(
+  nickname,
+  email,
+  password,
+  passwordConfirmation,
+) {
+  const userData = await authService.register(
+    nickname,
+    email,
+    password,
+    passwordConfirmation,
+  );
+  return userData;
+}
