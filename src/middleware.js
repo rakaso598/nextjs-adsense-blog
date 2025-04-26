@@ -15,11 +15,12 @@ export function middleware(request) {
   const isAuthRoute = authPaths.some((path) => pathname === path);
 
   // 인증 요구 경로 목록 관리 (실제 URL 기준)
-  const protectedRoutes = ["/blogs", "/profile"];
+
+  const isEditRoute = /^\/blogs\/[0-9]+\/edit/.test(pathname);
+  const protectedRoutes = ["/blogs/create", "/profile"];
   // 경로와 모든 하위 경로 포함
-  const isProtectedRoute = protectedRoutes.some(
-    (route) => pathname === route || pathname.startsWith(`${route}/`),
-  );
+  const isProtectedRoute =
+    protectedRoutes.some((route) => pathname === route) || isEditRoute;
 
   console.log("isProtectedRoute", isProtectedRoute);
 
