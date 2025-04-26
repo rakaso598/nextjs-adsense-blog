@@ -22,7 +22,7 @@ export default function Header() {
           <div className="flex">
             <div className="ml-6 flex items-center space-x-4">
               <Link
-                href={"/blogs"}
+                href={"/"}
                 className={`px-3 py-2 rounded-md text-sm font-medium text-blue-600 text-xl`}
               >
                 코드잇로그

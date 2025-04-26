@@ -6,8 +6,11 @@ import { useRouter } from "next/navigation";
 export default function DeleteButton({ children, id }) {
   const router = useRouter();
   const handleDelete = async () => {
-    await articleService.deleteArticle(id);
-    router.replace("/blogs");
+    const confirm = window.confirm("정말 삭제하시겠습니까?");
+    if (confirm) {
+      await articleService.deleteArticle(id);
+      router.replace("/blogs");
+    }
   };
   return (
     <button

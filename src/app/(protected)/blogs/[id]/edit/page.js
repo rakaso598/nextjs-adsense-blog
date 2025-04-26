@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { API_BASE_URL, fetchWithAuth } from "@/utils/index";
-
-export default function EditBlogPage({ params }) {
-  const { id } = params;
+import { articleService } from "@/lib/service/articleService";
+export default function EditBlogPage() {
+  const { id } = useParams();
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,14 +15,7 @@ export default function EditBlogPage({ params }) {
   useEffect(() => {
     async function fetchArticle() {
       try {
-        setIsLoading(true);
-        const response = await fetchWithAuth(`${API_BASE_URL}/articles/${id}`);
-
-        if (!response.ok) {
-          throw new Error("블로그 글을 불러오는데 실패했습니다.");
-        }
-
-        const data = await response.json();
+        const data = await articleService.getArticleById(id);
         setArticle(data);
       } catch (err) {
         setError(err.message);
@@ -45,21 +37,15 @@ export default function EditBlogPage({ params }) {
     try {
       const formData = new FormData(e.target);
       const articleData = {
+        articleId: id,
         title: formData.get("title"),
         content: formData.get("content"),
         imageUrl: formData.get("imageUrl") || article.imageUrl,
       };
 
-      const response = await fetchWithAuth(`${API_BASE_URL}/articles/${id}`, {
-        method: "PUT",
-        body: JSON.stringify(articleData),
-      });
+      await articleService.updateArticle(articleData);
 
-      if (!response.ok) {
-        throw new Error("글 수정에 실패했습니다.");
-      }
-
-      router.push(`/protected/blogs/${id}`);
+      router.replace(`/blogs/${id}`);
     } catch (err) {
       setError(err.message);
       setSubmitting(false);
@@ -90,10 +76,7 @@ export default function EditBlogPage({ params }) {
     return (
       <div className="text-center py-10 bg-gray-50 rounded-lg">
         <p className="text-gray-600">글을 찾을 수 없습니다.</p>
-        <Link
-          href="/protected/blogs"
-          className="mt-4 text-blue-500 hover:text-blue-700"
-        >
+        <Link href="/blogs" className="mt-4 text-blue-500 hover:text-blue-700">
           블로그 목록으로 돌아가기
         </Link>
       </div>
@@ -104,7 +87,7 @@ export default function EditBlogPage({ params }) {
     <div>
       <div className="mb-6">
         <Link
-          href={`/protected/blogs/${id}`}
+          href={`/blogs/${id}`}
           className="text-blue-500 hover:text-blue-700"
         >
           ← 돌아가기
@@ -185,7 +168,7 @@ export default function EditBlogPage({ params }) {
               {submitting ? "저장 중..." : "저장하기"}
             </button>
             <Link
-              href={`/protected/blogs/${id}`}
+              href={`/blogs/${id}`}
               className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
             >
               취소

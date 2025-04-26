@@ -1,9 +1,6 @@
-import { getTokenFromCookie } from "@/utils/auth";
-import Link from "next/link";
+import StartButton from "@/components/ui/StartButton";
 
 export default async function HomePage() {
-  const token = await getTokenFromCookie();
-
   return (
     <div className="py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,14 +25,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <div className="mt-8 flex justify-center">
-                <div className="inline-flex rounded-md shadow">
-                  <Link
-                    href={token ? "/blogs" : "/login"}
-                    className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-                  >
-                    {token ? "시작하기" : "로그인하기"}
-                  </Link>
-                </div>
+                <StartButton />
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import DeleteButton from "@/components/ui/Button";
+import DeleteButton from "@/components/ui/DeleteButton";
 import { useAuth } from "@/providers/AuthProvider";
 import Link from "next/link";
 import React from "react";

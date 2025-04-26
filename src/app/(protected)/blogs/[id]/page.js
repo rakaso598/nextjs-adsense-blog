@@ -11,10 +11,7 @@ export default async function BlogDetailPage({ params }) {
     return (
       <div className="text-center py-10 bg-gray-50 rounded-lg">
         <p className="text-gray-600">글을 찾을 수 없습니다.</p>
-        <Link
-          href="/protected/blogs"
-          className="mt-4 text-blue-500 hover:text-blue-700"
-        >
+        <Link href="/blogs" className="mt-4 text-blue-500 hover:text-blue-700">
           블로그 목록으로 돌아가기
         </Link>
       </div>
