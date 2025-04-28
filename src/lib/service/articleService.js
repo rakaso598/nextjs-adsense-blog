@@ -3,7 +3,8 @@ import { defaultFetch, tokenFetch } from "@/lib/fetchClient";
 export const articleService = {
   // 사용자 정보 요청
   getArticles: () => tokenFetch("/articles", { cache: "no-store" }),
-  getArticleById: (id) => tokenFetch(`/articles/${id}`, { cache: "no-store" }),
+  getArticleById: (id) =>
+    defaultFetch(`/articles/${id}`, { cache: "no-store" }),
   createArticle: ({
     image = "https://picsum.photos/200/300",
     content,
