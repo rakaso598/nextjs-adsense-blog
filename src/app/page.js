@@ -39,10 +39,7 @@ export default async function HomePage() {
                   블로그 글 작성
                 </h3>
                 <div className="mt-2 max-w-xl text-sm text-gray-500">
-                  <p>
-                    블로그 글을 작성하고 공유하세요. 이미지 URL을 추가하여
-                    시각적인 콘텐츠를 제공할 수 있습니다.
-                  </p>
+                  <p>블로그 글을 작성하고 공유하세요.</p>
                 </div>
               </div>
             </div>
