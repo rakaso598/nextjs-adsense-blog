@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const adSenseId = process.env.GOOGLE_ADSENSE_ID || ""; // 기본값 설정 (선택 사항)
+  const adSenseId = process.env.GOOGLE_ADSENSE_ID || "";
 
   return (
     <html lang="ko">

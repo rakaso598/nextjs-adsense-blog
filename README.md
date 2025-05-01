@@ -1,4 +1,20 @@
+# 진행상황
+
+- 처음에는 애드센스가 사이트를 확인할 수 없다고 함.
+
+- 애드센스 코드 스니펫을 `layout.js`에 환경변수 사용해 추가
+
+- 배포한 Vercel App에서 Environment Variables -> Environments를 Production으로 체크하고 -> 구글에서 제공한 Key와 Value 추가 (ca-pub-xxxxxxxxx)
+
+- 애드센스페이지로 가서 `코드를 삽입했습니다.`를 체크하고 `확인`을 누르면 이전과는 달리 `사이트가 확인되었습니다`라는 문구가 보임.
+
+- 모든 단계를 완료했다며 광고 게재 가능 여부를 검토합니다.
+
+- Vercel 배포 성공화면
+
 ![image](https://github.com/user-attachments/assets/7bf7e5db-109c-4d82-97c0-ba9fb3c725d5)
+
+---
 
 ## Next.js 블로그 프로젝트 with Google AdSense
 
