@@ -8,6 +8,15 @@ export default async function HomePage() {
           <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
             Example
           </h1>
+          {/* 페이지 제목 아래 광고 (반응형 자동 광고) */}
+          <div className="mt-5">
+            <AdSense
+              adSlot="1104919833"
+              adFormat="auto"
+              className="mx-auto"
+              style={{ maxWidth: "728px" }}
+            />
+          </div>
           <p className="mt-5 max-w-xl mx-auto text-xl text-gray-500">
             Next.js App Router
           </p>
@@ -17,12 +26,17 @@ export default async function HomePage() {
           <div className="rounded-lg shadow-lg overflow-hidden">
             <div className="bg-white p-6 sm:p-10">
               <div className="text-center">
-                <h2 className="text-3xl font-extrabold text-gray-900">
-                  <AdSense adSlot="YOUR_AD_UNIT_ID" adFormat="auto" />
-                </h2>
+                <h2 className="text-3xl font-extrabold text-gray-900"></h2>
                 <p className="mt-4 text-lg text-gray-500">Example</p>
               </div>
-              <div className="mt-8 flex justify-center"></div>
+              {/* 콘텐츠 영역 상단 광고 (배너 광고) */}
+              <div className="mt-8 flex justify-center">
+                <AdSense
+                  adSlot="6879990693"
+                  adFormat="banner"
+                  style={{ width: "300px", height: "250px" }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -36,6 +50,18 @@ export default async function HomePage() {
                 </h3>
                 <div className="mt-2 max-w-xl text-sm text-gray-500">
                   <p>Content1</p>
+                  {/* 콘텐츠 내부 광고 (작은 배너 광고) */}
+                  <div className="mt-4">
+                    <AdSense
+                      adSlot="4882406950"
+                      adFormat="banner"
+                      style={{
+                        width: "300px",
+                        height: "250px",
+                        margin: "0 auto",
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -47,10 +73,32 @@ export default async function HomePage() {
                 </h3>
                 <div className="mt-2 max-w-xl text-sm text-gray-500">
                   <p>Content2</p>
+                  {/* 콘텐츠 내부 광고 (작은 배너 광고) */}
+                  <div className="mt-4">
+                    <AdSense
+                      adSlot="1326019911"
+                      adFormat="banner"
+                      style={{
+                        width: "300px",
+                        height: "250px",
+                        margin: "0 auto",
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* 페이지 하단 광고 (반응형 자동 광고) */}
+        <div className="mt-12">
+          <AdSense
+            adSlot="9314582342"
+            adFormat="auto"
+            className="mx-auto"
+            style={{ maxWidth: "728px" }}
+          />
         </div>
       </div>
     </div>
