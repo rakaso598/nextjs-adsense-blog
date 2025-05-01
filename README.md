@@ -18,6 +18,11 @@
 - Vercel 배포 성공화면
 ![image](https://github.com/user-attachments/assets/7bf7e5db-109c-4d82-97c0-ba9fb3c725d5)
 
+- 배포시 개발자도구의 `Network`탭과 `Console`탭에 별다른 오류가 발생하지 않음.
+![image](https://github.com/user-attachments/assets/2615e1fb-546b-4077-8020-30b72a77a8d8)
+
+- 광고가 로드되지는 않지만 구글 애드센스 API 연결을 성공한 것으로 보입니다. 다만 구글 애드센스가 아직 광고를 허용해주지 않은 상황으로 판단됨. (2~4주까지 소요될 수 있다는 문구 확인)
+
 ---
 
 ## Next.js 블로그 프로젝트 with Google AdSense
