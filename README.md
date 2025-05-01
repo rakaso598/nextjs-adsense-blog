@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/7bf7e5db-109c-4d82-97c0-ba9fb3c725d5)
+
 ## Next.js 블로그 프로젝트 with Google AdSense
 
 이 프로젝트는 Next.js App Router를 기반으로 Google AdSense 광고를 통합한 기본적인 블로그 형태를 제공합니다.
