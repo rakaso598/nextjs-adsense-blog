@@ -1,3 +1,5 @@
+import AdSense from "@/components/AdSense";
+
 export default async function HomePage() {
   return (
     <div className="py-12">
@@ -16,7 +18,7 @@ export default async function HomePage() {
             <div className="bg-white p-6 sm:p-10">
               <div className="text-center">
                 <h2 className="text-3xl font-extrabold text-gray-900">
-                  Starter
+                  <AdSense adSlot="YOUR_AD_UNIT_ID" adFormat="auto" />
                 </h2>
                 <p className="mt-4 text-lg text-gray-500">Example</p>
               </div>
