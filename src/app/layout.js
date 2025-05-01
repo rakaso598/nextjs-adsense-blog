@@ -16,9 +16,9 @@ export default function RootLayout({ children }) {
       <head>
         <script
           async
-          crossOrigin="anonymous"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}`}
-        />
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3255077517796058"
+          crossorigin="anonymous"
+        ></script>
       </head>
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen bg-gray-100 items-center">
