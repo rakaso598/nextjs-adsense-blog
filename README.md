@@ -1,277 +1,128 @@
-## Next.js 앱 라우터 기반 구글 애드센스 적용 보일러플레이트
+## Next.js 블로그 프로젝트 with Google AdSense
 
----
+이 프로젝트는 Next.js App Router를 기반으로 Google AdSense 광고를 통합한 기본적인 블로그 형태를 제공합니다.
 
-### 소개
-
-이 보일러플레이트는 Next.js 앱 라우터 환경에서 구글 애드센스를 안전하고 효과적으로 통합하는 방법을 제시합니다. AdSense 정책 준수를 위한 모범 사례를 따르고, 성능 및 사용자 경험을 최적화하는 데 초점을 맞춥니다.
-
-### 파일 구조
+### 프로젝트 구조
 
 ```
+src/
 ├── app/
-│   ├── layout.js: 전역 레이아웃 컴포넌트, Google AdSense 스크립트 로드
-│   └── components/
-│       └── AdSense.js: 광고 단위 컴포넌트, 광고 로드 및 표시, 오류 처리
-├── hooks/
-│   └── useAdSenseReady.js: AdSense 스크립트 로드 상태 및 오류 관리 (Custom Hook)
-└── utils/
-    └── adUtils.js: 유틸리티 함수 (광고 관련, 선택 사항)
+│   ├── layout.js         // 전체 레이아웃
+│   ├── page.js           // 홈페이지 (포스트 목록)
+│   └── posts/
+│       └── [slug]/
+│           └── page.js     // 개별 포스트 페이지
+├── components/
+│   ├── AdSense.js        // AdSense 광고 컴포넌트
+│   └── common/
+│       ├── Header.js       // 공통 헤더 컴포넌트 (선택 사항)
+│       └── Footer.js       // 공통 푸터 컴포넌트 (선택 사항)
+└── lib/
+    └── posts.js          // 포스트 데이터 처리 로직
 ```
 
-### 주요 기능
+### 설정 방법
 
-- **최적화된 AdSense 스크립트 로딩:** `useAdSenseReady` 훅을 통해 AdSense 스크립트를 효율적으로 관리하고, 초기 로딩 지연을 최소화하며, 페이지 이동 시 불필요한 로딩을 방지합니다.
-- **반응형 광고 지원:** 다양한 `adFormat`, `layout`, `layoutKey` prop을 통해 반응형 디자인에 맞춰 광고 단위를 유연하게 구성할 수 있습니다.
-- **클라이언트 측 렌더링:** 광고 표시는 클라이언트 측에서 이루어져 초기 페이지 로딩 속도를 개선합니다.
-- **스크립트 로드 및 광고 표시 오류 처리:** 스크립트 로딩 실패 및 광고 요청 실패 시 오류를 감지하고 사용자에게 알림 메시지를 표시하여 문제 발생 상황을 명확하게 인지할 수 있도록 합니다.
-- **명확하고 재사용 가능한 컴포넌트 구조:** 체계적인 파일 구조와 독립적인 컴포넌트로 코드의 이해도와 유지보수성을 높이고, 광고 단위 컴포넌트를 쉽게 재사용할 수 있도록 설계되었습니다.
-- **AdSense 정책 준수 고려:** AdSense 정책 준수의 중요성을 강조하고, 클라이언트 측 렌더링 방식을 통해 정책 위반 가능성을 줄입니다.
+1.  **프로젝트 생성:** Next.js 프로젝트가 없다면 새로 생성합니다.
 
-### 기술 스택
-
-- Next.js (14+ 환경에서 테스트됨, 앱 라우터 기준)
-- React Hooks
-
-### 시작하기
-
-1.  **프로젝트 설정:** Next.js 프로젝트를 생성하거나 기존 프로젝트를 사용합니다. (`npx create-next-app@latest --app`)
-2.  **파일 복사:** 이 보일러플레이트의 파일들을 프로젝트 구조에 맞게 복사합니다. `app` 디렉토리 내에 `components` 폴더와 `layout.js` 파일을 생성하고, `hooks` 및 `utils` 폴더를 루트 디렉토리에 생성합니다.
-3.  **환경 변수 설정:** `.env.local` 파일에 실제 Google AdSense 계정 ID를 추가합니다.
-
-    ```
-    NEXT_PUBLIC_GOOGLE_ADSENSE_ID=ca-pub-your-adsense-publisher-id
+    ```bash
+    npx create-next-app@latest nextjs-blog-adsense
+    cd nextjs-blog-adsense
     ```
 
-4.  **광고 단위 ID 설정:** `app/components/AdSense.js` 컴포넌트에서 `adSlot` prop에 실제 광고 단위 ID를 설정합니다.
+2.  **파일 및 폴더 생성:** 위 프로젝트 구조에 따라 필요한 폴더(`components`, `components/common`, `lib`, `app/posts/[slug]`)와 파일을 생성합니다.
 
-    **app/components/AdSense.js:**
+3.  **`components/AdSense.js`:** 이전 질문에서 사용했던 `AdSense` 컴포넌트 코드를 이 파일에 복사합니다.
 
-    ```js
-    "use client";
+4.  **`lib/posts.js`:** 제공된 `lib/posts.js` 코드를 이 파일에 복사하고, 실제 포스트 데이터를 관리하는 방식으로 수정합니다. (JSON 데이터, Markdown 파일 연동, 데이터베이스 연동 등)
 
-    import React, { useEffect } from "react";
-    import { useAdSenseReady } from "@/hooks/useAdSenseReady";
+5.  **`app/page.js`:** 제공된 `app/page.js` 코드를 이 파일에 복사합니다.
 
-    function AdSense({
-      adSlot,
-      adFormat = "auto",
-      layout,
-      layoutKey,
-      style,
-      className,
-    }) {
-      const { ready, error } = useAdSenseReady(); // error 상태를 받습니다.
+6.  **`app/posts/[slug]/page.js`:** 제공된 `app/posts/[slug]/page.js` 코드를 이 파일에 복사합니다.
 
-      useEffect(() => {
-        if (ready) {
-          try {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-          } catch (loadError) {
-            console.error("AdSense 광고 로드 오류:", loadError);
-            // 광고 로드 실패 시 error 상태를 업데이트 (선택 사항)
-            // setError(loadError);
-          }
-        }
-      }, [ready, adSlot]);
+7.  **`app/layout.js`:** Google AdSense 스크립트를 `<head>` 섹션에 추가합니다. `.env` 파일에서 `NEXT_PUBLIC_GOOGLE_ADSENSE_ID` 환경 변수를 읽어와 사용하도록 설정합니다.
 
-      if (error) {
-        return (
-          <div className={className} style={style}>
-            광고를 로드하는 데 실패했습니다.
-          </div>
-        );
-      }
-
-      if (!ready) {
-        return null; // 또는 로딩 중임을 나타내는 UI를 렌더링할 수도 있습니다.
-      }
-
-      return (
-        <ins
-          className={`adsbygoogle ${className || ""}`}
-          style={{ display: "block", ...style }}
-          data-ad-client={process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}
-          data-ad-slot={adSlot}
-          data-ad-format={adFormat}
-          {...(layout && { "data-ad-layout": layout })}
-          {...(layoutKey && { "data-ad-layout-key": layoutKey })}
-          data-full-width-responsive="true"
-        ></ins>
-      );
-    }
-
-    export default AdSense;
-    ```
-
-5.  **`layout.js` 수정:** `app/layout.js` 파일의 `<head>` 태그 내에 AdSense 스크립트를 추가합니다.
-
-    **app/layout.js:**
-
-    ```jsx
+    ```javascript
+    // app/layout.js
     import { Inter } from "next/font/google";
     import "./globals.css";
+    import Header from "@/components/common/Header"; // 선택 사항
+    import Footer from "@/components/common/Footer"; // 선택 사항
 
     const inter = Inter({ subsets: ["latin"] });
 
     export const metadata = {
-      title: "My App",
-      description: "Generated by create next app",
+      title: "나의 블로그",
+      description: "Next.js와 Google AdSense를 통합한 블로그 예시입니다.",
     };
 
     export default function RootLayout({ children }) {
+      const adSenseId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID || "";
+
       return (
-        <html lang="en">
+        <html lang="ko">
           <head>
-            <script
-              async
-              crossOrigin="anonymous"
-              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}`}
-            />
+            {adSenseId && (
+              <script
+                async
+                src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseId}`}
+                crossOrigin="anonymous"
+              ></script>
+            )}
           </head>
-          <body className={inter.className}>{children}</body>
+          <body className={inter.className}>
+            {/* <Header /> */}
+            <main className="container mx-auto py-8">{children}</main>
+            {/* <Footer /> */}
+          </body>
         </html>
       );
     }
     ```
 
-6.  **`useAdSenseReady` 훅:** `hooks` 폴더에 `useAdSenseReady.js` 파일을 생성하고 다음 코드를 추가합니다.
+8.  **.env 파일 설정:** 프로젝트 루트 디렉토리에 `.env.local` 파일을 생성하고 Google AdSense 게시자 ID를 환경 변수로 설정합니다.
 
-    **hooks/useAdSenseReady.js:**
+    ```
+    NEXT_PUBLIC_GOOGLE_ADSENSE_ID=ca-pub-your-publisher-id
+    ```
+
+    **주의:** 실제 배포 환경에서는 Vercel 프로젝트 설정의 "Environment Variables"에 `NEXT_PUBLIC_GOOGLE_ADSENSE_ID`를 Production 스코프로 설정해야 합니다.
+
+9.  **광고 단위 ID 변경:** `app/page.js`와 `app/posts/[slug]/page.js` 파일 내의 `<AdSense>` 컴포넌트의 `adSlot` prop 값을 실제 Google AdSense 광고 단위 ID로 변경합니다.
 
     ```javascript
-    "use client";
-
-    import { useState, useEffect } from "react";
-    import { useRouter } from "next/navigation";
-
-    const useAdSenseReady = () => {
-      const [ready, setReady] = useState(false);
-      const [error, setError] = useState(null);
-      const router = useRouter();
-
-      useEffect(() => {
-        if (typeof window === "undefined") {
-          return;
-        }
-
-        const handleAdSenseScriptLoad = () => {
-          setReady(true);
-          setError(null); // 로드 성공 시 에러 상태 초기화
-        };
-
-        const handleAdSenseScriptError = (e) => {
-          setError(
-            e instanceof ErrorEvent
-              ? e.error
-              : new Error("Failed to load AdSense script")
-          );
-          setReady(false); // 에러 발생 시 ready 상태를 false로 설정
-        };
-
-        const onRouteChangeStart = () => {
-          setReady(false);
-          setError(null);
-        };
-
-        router.events?.on("routeChangeStart", onRouteChangeStart);
-
-        if (!window.adsbygoogle) {
-          const script = document.createElement("script");
-          script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}`;
-          script.async = true;
-          script.crossOrigin = "anonymous";
-          script.onload = handleAdSenseScriptLoad;
-          script.onerror = handleAdSenseScriptError;
-          document.head.appendChild(script);
-        } else {
-          setReady(true);
-          setError(null); // 이미 로드된 경우 에러 상태 초기화
-        }
-
-        if (typeof window !== "undefined" && !window.adsbygoogle) {
-          window.adsbygoogle = {
-            loaded: false,
-            push: (...args) => {
-              if (process.env.NODE_ENV === "development") {
-                console.warn("AdSense 처리 대기열에 푸시:", args);
-              }
-              // 애드센스 로드 전에 푸시된 명령들을 처리하는 로직 (최소 기능만 제공)
-            },
-          };
-        }
-
-        return () => {
-          router.events?.off("routeChangeStart", onRouteChangeStart);
-          // 스크립트는 document.head에 유지하므로 제거하지 않습니다.
-        };
-      }, [router.events]);
-
-      return { ready, error };
-    };
-
-    export { useAdSenseReady };
+    <AdSense adSlot="YOUR_AUTO_AD_SLOT_ID" adFormat="auto" ... />
+    <AdSense adSlot="YOUR_RESPONSIVE_AD_SLOT_ID_TOP" adFormat="auto" ... />
+    <AdSense adSlot="YOUR_BANNER_AD_SLOT_ID" adFormat="banner" ... />
     ```
 
-7.  **광고 컴포넌트 사용:** 원하는 페이지나 컴포넌트에서 `<AdSense />` 컴포넌트를 import하여 사용합니다. 필요에 따라 `adFormat`, `layout`, `layoutKey` 등의 props를 조정합니다.
+10. **선택 사항: 공통 컴포넌트:** `components/common/Header.js`와 `components/common/Footer.js` 파일을 생성하고 필요한 공통 UI 요소를 추가합니다. `app/layout.js`에서 해당 컴포넌트를 import하여 사용할 수 있습니다.
 
-    **app/page.js (예시):**
+11. **이미지 폴더:** `public` 폴더 내에 `images` 폴더를 생성하고 예시 이미지(`example.jpg`)를 추가합니다.
 
-    ```jsx
-    import AdSense from "./components/AdSense";
+### 실행 방법
 
-    export default function HomePage() {
-      return (
-        <div>
-          <h1>메인 페이지</h1>
-          <AdSense adSlot="YOUR_AD_UNIT_ID" adFormat="auto" />
-          <p>본문 내용...</p>
-        </div>
-      );
-    }
-    ```
+```bash
+npm run dev
+# 또는
+yarn dev
+```
 
-### 주요 컴포넌트 및 훅 설명
+개발 서버를 실행한 후 `http://localhost:3000`에서 블로그를 확인할 수 있습니다.
 
-- **`useAdSenseReady` 훅:**
+### 배포 방법
 
-  - AdSense 스크립트의 로딩 상태(`ready`)와 에러(`error`)를 관리합니다.
-  - 페이지 이동 시 스크립트 로딩 상태를 초기화하여 중복 로딩을 방지하고, 새로운 페이지에서 광고를 다시 로드할 준비를 합니다.
-  - `window.adsbygoogle` 객체가 존재하지 않을 경우, 초기화하여 광고 푸시 대기열을 안전하게 처리할 수 있도록 합니다.
-  - 스크립트 로드 성공 시 에러 상태를 `null`로 초기화하여 이전 오류 상태가 남아있는 것을 방지합니다.
-  - 스크립트 로드 실패 시 `error` 상태에 에러 객체를 설정하고 `ready` 상태를 `false`로 설정하여 `AdSense` 컴포넌트가 오류 메시지를 표시하도록 합니다.
+Vercel 플랫폼을 사용하여 배포하는 것을 권장합니다.
 
-- **`AdSense` 컴포넌트:**
+1.  Vercel 계정에 깃허브 저장소를 연결합니다.
+2.  Vercel 프로젝트 설정에서 환경 변수(`NEXT_PUBLIC_GOOGLE_ADSENSE_ID`)를 Production 스코프로 추가합니다.
+3.  Vercel이 자동으로 빌드 및 배포를 진행합니다.
 
-  - AdSense 광고 단위를 표시하는 클라이언트 컴포넌트입니다 (`'use client';` 선언 필수).
-  - `adSlot` (필수), `adFormat`, `layout`, `layoutKey`, `style`, `className` 등의 props를 통해 다양한 광고 설정 및 스타일링을 지원합니다.
-  - `useAdSenseReady` 훅에서 반환된 `ready` 상태를 기반으로 광고 로드 시점을 결정합니다.
-  - `useEffect` 훅을 사용하여 컴포넌트가 마운트되고 `ready` 상태가 `true`일 때 `adsbygoogle.push({})`를 호출하여 실제 광고를 로드하고 표시합니다.
-  - `error` 상태가 `true`일 경우, "광고를 로드하는 데 실패했습니다."라는 오류 메시지를 사용자에게 명확하게 표시합니다.
-  - `ready` 상태가 `false`이고 `error` 상태가 `false`일 때는 `null`을 반환하여 AdSense 스크립트 로딩 전에 광고 관련 코드가 실행되어 발생할 수 있는 오류를 방지하고 초기 렌더링 시 불필요한 빈 공간을 만들지 않습니다.
+### 주의 사항
 
-### 고려 사항
+- **고품질 콘텐츠:** Google AdSense 승인을 위해서는 웹사이트에 충분하고 가치 있는 고품질 콘텐츠를 게시해야 합니다. 단순히 예시 텍스트만으로는 승인을 받을 수 없습니다.
+- **AdSense 정책 준수:** Google AdSense 프로그램 정책을 철저히 준수해야 합니다.
+- **광고 단위 ID:** `<AdSense>` 컴포넌트의 `adSlot`에는 실제 AdSense 광고 단위 ID를 사용해야 합니다.
+- **환경 변수:** 개발 환경과 배포 환경의 환경 변수 설정을 올바르게 관리해야 합니다.
 
-- **실제 계정 정보 및 광고 단위 ID:** `.env.local` 파일의 `NEXT_PUBLIC_GOOGLE_ADSENSE_ID`와 `<AdSense adSlot>` prop을 실제 AdSense 계정 정보 및 광고 단위 ID로 반드시 교체해야 합니다. 그렇지 않으면 광고가 정상적으로 표시되지 않으며, 개발 환경에서는 고의적인 오류 (400 Bad Request)가 발생할 수 있습니다.
-- **AdSense 정책 준수:** 이 보일러플레이트는 AdSense 통합의 기술적인 측면을 제공하며, 실제 광고 게재 방식이 Google AdSense 정책을 준수하는지 지속적으로 확인하고 관리하는 것은 개발자의 책임입니다. 정책 위반 시 광고 게재 제한 또는 계정 정지 등의 불이익이 발생할 수 있습니다.
-- **클라이언트 컴포넌트 사용:** `<AdSense>` 컴포넌트는 React Hooks (`useEffect`)를 사용하므로 반드시 클라이언트 컴포넌트로 선언해야 합니다 (`'use client';`).
-- **추가 기능:** 수익 극대화를 위해서는 A/B 테스팅, 다양한 광고 단위 배치 전략, 사용자 행동 분석 등의 추가적인 기능 구현 및 최적화 작업이 필요할 수 있습니다.
-- **성능 최적화:** 광고 게재는 페이지 로딩 속도에 영향을 미칠 수 있습니다. 필요에 따라 광고 로딩 방식 (lazy loading 등)을 최적화하여 사용자 경험을 개선할 수 있습니다.
-
-### 면책 조항 및 개발자의 책임 사항
-
-**주의:** 이 보일러플레이트는 Google AdSense를 Next.js 앱 라우터 프로젝트에 통합하는 기본적인 구조와 방법을 제시할 뿐이며, **수익 발생을 보장하지 않습니다.** 광고 수익은 웹사이트 트래픽, 사용자 참여도, 광고 배치, AdSense 정책 준수 등 다양한 요인에 따라 달라질 수 있습니다.
-
-**개발자는 다음 사항에 대한 전적인 책임을 집니다:**
-
-- **Google AdSense 정책 준수:** 개발자는 Google AdSense 프로그램 정책, 웹마스터 가이드라인 및 관련 규정을 숙지하고 준수해야 합니다. 이 보일러플레이트를 사용하여 광고를 게재하는 방식이 정책을 위반하지 않는지 지속적으로 확인해야 합니다. 정책 위반으로 인해 발생하는 모든 문제 (광고 게재 제한, 계정 정지 등)에 대한 책임은 개발자에게 있습니다.
-- **실제 계정 정보 및 광고 단위 ID의 정확성:** 환경 변수 및 컴포넌트에 설정하는 AdSense 계정 ID 및 광고 단위 ID가 정확해야 합니다. 잘못된 정보 입력으로 인해 광고가 표시되지 않거나 수익이 정상적으로 집계되지 않을 수 있으며, 개발 환경에서 의도치 않은 오류가 발생할 수 있습니다.
-- **광고 게재 및 사용자 경험 최적화:** 광고 배치, 광고 형식 선택 등이 사용자 경험을 저해하지 않도록 신중하게 결정해야 합니다. 과도하거나 오해를 유발하는 광고 게재는 사용자 이탈을 초래할 수 있습니다.
-- **기술적인 문제 해결:** 이 보일러플레이트 사용 중 발생하는 모든 기술적인 문제에 대한 해결 책임은 개발자에게 있습니다.
-- **데이터 보안 및 개인 정보 보호:** 광고 게재 과정에서 사용자 데이터가 수집될 수 있습니다. 관련 법규 및 개인 정보 보호 정책을 준수하여 사용자의 권리를 보호해야 합니다.
-
-**이 보일러플레이트의 개발자는 위에서 언급된 사항에 대해 어떠한 보증도 제공하지 않으며, 사용으로 인해 발생하는 직접적, 간접적 손해에 대해 책임을 지지 않습니다.**
-
-### 결론
-
-이 보일러플레이트는 Next.js 앱 라우터 환경에서 구글 애드센스를 통합하는 데 유용한 시작점을 제공합니다. 개발자는 이 코드를 기반으로 실제 AdSense 계정 정보와 광고 단위 ID를 올바르게 설정하고, AdSense 정책을 철저히 준수하며, 사용자 경험을 최적화하기 위한 노력을 기울여야 구글 애드센스를 효과적으로 활용할 수 있을 것입니다. 특히 개발 환경에서의 오류 발생 시, `AdSense` 컴포넌트에서 오류 메시지를 통해 문제 상황을 명확히 인지하고 해결할 수 있도록 설계되었습니다.
+이 README 파일은 기본적인 블로그 형태를 구축하고 AdSense를 통합하는 과정을 안내합니다. 실제 운영 환경에서는 데이터 관리 방식, 디자인, 추가 기능 등을 필요에 따라 확장해야 합니다.
