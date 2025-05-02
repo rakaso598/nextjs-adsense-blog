@@ -1,27 +1,27 @@
 # 🔍 진행상황
 
-- 📍 **처음에는 애드센스가 사이트를 확인할 수 없다고 함.**
+## 1. 📍 **처음에는 애드센스가 사이트를 확인할 수 없다고 함.**
 ![image](https://github.com/user-attachments/assets/de2e44e5-c450-4fd5-afc0-488e8919a8c4)
 
-- 📍 **애드센스 코드 스니펫을 `layout.js`에 환경변수 사용해 추가**
+## 2. 📍 **애드센스 코드 스니펫을 `layout.js`에 환경변수 사용해 추가**
 ![image](https://github.com/user-attachments/assets/fb1250db-3786-42d8-a3c9-feb5e1019624)
 
-- 📍 **배포한 Vercel App에서 Environment Variables -> Environments를 Production으로 체크하고 -> 구글에서 제공한 Key와 Value 추가 (ca-pub-xxxxxxxxx)**
+## 3. 📍 **배포한 Vercel App에서 Environment Variables -> Environments를 Production으로 체크하고 -> 구글에서 제공한 Key와 Value 추가 (ca-pub-xxxxxxxxx)**
 ![image](https://github.com/user-attachments/assets/a39208b9-329a-4d48-b668-0c224d33198f)
 
-- 📍 **애드센스 코드 스니펫을 확인했던 페이지로 가서 `코드를 삽입했습니다.`를 체크하고 `확인`을 누르면 이전과는 달리 `사이트가 확인되었습니다`라는 문구가 보임.**
+## 4. 📍 **애드센스 코드 스니펫을 확인했던 페이지로 가서 `코드를 삽입했습니다.`를 체크하고 `확인`을 누르면 이전과는 달리 `사이트가 확인되었습니다`라는 문구가 보임.**
 ![image](https://github.com/user-attachments/assets/5c4b6eb3-728a-461a-b88d-a23a98629a89)
 
-- 📍 **모든 단계를 완료했다며 광고 게재 가능 여부를 검토합니다.**
-![image](https://github.com/user-attachments/assets/2a82d8bb-3b95-493f-9b0a-7b81a0666e88)
+## 5. 📍 **모든 단계를 완료했다며 광고 게재 가능 여부를 검토합니다.**
+![image](https://github.com/user-attachments/assets/f4d1cf74-f14c-4399-a31d-f3d587753878)
 
-- 📍 **Vercel 배포 성공화면**
+## 6. 📍 **Vercel 배포 성공화면**
 ![image](https://github.com/user-attachments/assets/7bf7e5db-109c-4d82-97c0-ba9fb3c725d5)
 
-- 📍 **배포시 개발자도구의 `Network`탭과 `Console`탭에 별다른 오류가 발생하지 않음.**
+## 7. 📍 **배포시 개발자도구의 `Network`탭과 `Console`탭에 별다른 오류가 발생하지 않음.**
 ![image](https://github.com/user-attachments/assets/2615e1fb-546b-4077-8020-30b72a77a8d8)
 
-- 📍 **광고가 로드되지는 않지만 구글 애드센스 API 연결을 성공한 것으로 보입니다. 다만 구글 애드센스가 아직 광고를 허용해주지 않은 상황으로 판단됨. (2~4주까지 소요될 수 있다는 문구 확인)**
+## 8. 📍 **광고가 로드되지는 않지만 구글 애드센스 API 연결을 성공한 것으로 보입니다. 다만 구글 애드센스가 아직 광고를 허용해주지 않은 상황으로 판단됨. (2~4주까지 소요될 수 있다는 문구 확인)**
 
 ---
 
